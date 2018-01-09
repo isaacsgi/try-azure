@@ -40,7 +40,7 @@ public class App
             System.out.println("peekaboo");
             System.out.println(data);
 
-            pipeline.apply(Create.of("/gisampledata/Drivers.txt"))
+            pipeline.apply(Create.of(data))
                     .apply(ParDo.of(new DoFn<String, String>() {
               @ProcessElement
               public void processElement(ProcessContext processContext) throws IOException {
