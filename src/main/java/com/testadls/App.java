@@ -23,12 +23,12 @@ import org.apache.beam.sdk.transforms.ParDo;
 
 public class App 
 {
-    private static String accountFQDN = "gidatalake1.azuredatalakestore.net";
-    private static String cId = "f336a26f-e14b-4f19-93ae-ff56b0aa9146"; 
+    private static String accountFQDN = "SECUREDATA.azuredatalakestore.net";
+    private static String cId = "SECUREDATA"; 
     private static String authTokenRoot = "https://login.microsoftonline.com/";
-    private static String authTokenChild = "72f988bf-86f1-41af-91ab-2d7cd011db47/oauth2/token";
+    private static String authTokenChild = "SECUREDATA";
     private static String authTokenUrl = authTokenRoot + authTokenChild;
-    private static String cKey = "8bd03de9-dd3c-4211-aad6-e77ea3330257";
+    private static String cKey = "SECUREDATA";
   
     public static void main(String[] args) throws Exception {
       
