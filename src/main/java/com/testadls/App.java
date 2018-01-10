@@ -23,12 +23,12 @@ import org.apache.beam.sdk.transforms.ParDo;
 
 public class App 
 {
-    private static String accountFQDN = "SECUREDATA.azuredatalakestore.net";
-    private static String cId = "SECUREDATA"; 
-    private static String authTokenRoot = "https://login.microsoftonline.com/";
-    private static String authTokenChild = "SECUREDATA";
-    private static String authTokenUrl = authTokenRoot + authTokenChild;
-    private static String cKey = "SECUREDATA";
+        private static String accountFQDN = "SECUREDATA.azuredatalakestore.net";
+        private static String cId = "SECUREDATA"; 
+        private static String authTokenRoot = "https://login.microsoftonline.com/";
+        private static String authTokenChild = "SECUREDATA/oauth2/token";
+        private static String authTokenUrl = authTokenRoot + authTokenChild;
+        private static String cKey = "SECUREDATA";
   
     public static void main(String[] args) throws Exception {
       
@@ -40,7 +40,7 @@ public class App
             System.out.println("peekaboo");
             System.out.println(data);
 
-            pipeline.apply(Create.of("/gisampledata/Drivers.txt"))
+            pipeline.apply(Create.of(data))
                     .apply(ParDo.of(new DoFn<String, String>() {
               @ProcessElement
               public void processElement(ProcessContext processContext) throws IOException {
@@ -61,8 +61,8 @@ public class App
                       while ((line = reader.readLine()) != null) 
                        {
                         lineNum++;
-                        System.out.println(">>Line No: "+lineNum);
-                        processContext.output(line);
+                        System.out.println(">>"+filename+" Line No: "+lineNum);
+                        processContext.output(">>"+filename+" Line No "+lineNum+": "+line);
                        }
                       reader.close();
                       }
@@ -79,6 +79,8 @@ public class App
             System.out.println(element);
           }
         }));
+
+        pipeline.run();
 }    
 
 }
