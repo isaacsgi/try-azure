@@ -1,6 +1,8 @@
 package com.testadls;
 
 import com.testadls.common.ExampleUtils;
+
+/*
 import com.microsoft.azure.datalake.store.ADLStoreClient;
 import com.microsoft.azure.datalake.store.oauth2.AccessTokenProvider;
 import com.microsoft.azure.datalake.store.oauth2.ClientCredsTokenProvider;
@@ -13,7 +15,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
-
+*/
 
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.options.PipelineOptions;
@@ -129,9 +131,7 @@ static class ExtractWordsFn extends DoFn<String, String> {
         ADLSWordCountOptions options = PipelineOptionsFactory.fromArgs(args).withValidation()
           .as(ADLSWordCountOptions.class);
         Pipeline p = Pipeline.create(options);
-        System.out.println(">>Got Input URI: " + options.getAdlInputURI());
-        // Concepts #2 and #3: Our pipeline applies the composite CountWords transform, and passes the
-        // static FormatAsTextFn() to the ParDo transform.
+        System.out.println(">>ADLSWordCount Got Input URI: " + options.getAdlInputURI());
         p.apply("ReadLines", TextIO.read().from(options.getAdlInputURI()))
          .apply(new CountWords())
          .apply(MapElements.via(new FormatAsTextFn()))
