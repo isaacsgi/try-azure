@@ -11,12 +11,12 @@ import com.microsoft.azure.datalake.store.DirectoryEntry;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 */
 
+import java.io.IOException;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
@@ -138,6 +138,7 @@ static class ExtractWordsFn extends DoFn<String, String> {
          .apply("Display Lines", ParDo.of(new DoFn<String, Void>() {
                 @ProcessElement
                 public void processElement(ProcessContext processContext) throws IOException {
+                  System.out.println(">>ADLSWordCount processContext " + processContext.element());
                   String element = processContext.element();
                   System.out.println(element);
                 }
